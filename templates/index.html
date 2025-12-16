@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Wild Watch</title>
+	<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+	<!-- Hero Section with Auth -->
+	<header class="hero">
+		<div class="hero-content">
+			<h1 class="hero-title">WILD WATCH</h1>
+			<p class="hero-subtitle">Wild Animal Monitoring System</p>
+			<p class="hero-subtitle">AI-Powered Detection & Real-Time Alerts</p>
+			<p class="hero-description">
+				Advanced YOLOv8 technology to track and detect Leopard, Tiger, Lion, and Cheetah in real-time. 
+				Stay safe with customizable alert radius and instant notifications to Wildlife Crime Control Bureau.
+			</p>
+			<div class="hero-features">
+				<div class="feature-badge">
+					<span class="badge-icon">🐆</span>
+					<span>4 Species Detection</span>
+				</div>
+				<div class="feature-badge">
+					<span class="badge-icon">📍</span>
+					<span>Location-Based Alerts</span>
+				</div>
+				<div class="feature-badge">
+					<span class="badge-icon">⚡</span>
+					<span>Real-Time Monitoring</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Authentication Card -->
+		<div class="auth-card">
+			<div class="auth-header">
+				<h2>Get Started</h2>
+				<p>Create an account or login to access the monitoring system</p>
+			</div>
+			<div class="tabs">
+				<button id="tab-login" class="tab active" aria-selected="true">Login</button>
+				<button id="tab-signup" class="tab" aria-selected="false">Sign Up</button>
+			</div>
+
+			<!-- Login Form -->
+			<div id="login-form" class="form-group" role="tabpanel">
+				<div class="input-group">
+					<label for="login-email">Email Address</label>
+					<input 
+						id="login-email" 
+						type="email" 
+						placeholder="your.email@example.com" 
+						required
+						autocomplete="email"
+					/>
+				</div>
+				<div class="input-group">
+					<label for="login-password">Password</label>
+					<input 
+						id="login-password" 
+						type="password" 
+						placeholder="Enter your password" 
+						required
+						autocomplete="current-password"
+					/>
+				</div>
+                <button id="login-btn" class="btn-primary" type="button">
+					<span>Login</span>
+				</button>
+				<small id="login-msg" class="msg" role="alert"></small>
+			</div>
+
+			<!-- Sign Up Form -->
+			<div id="signup-form" class="form-group hidden" role="tabpanel">
+				<div class="input-group">
+					<label for="signup-name">Full Name</label>
+					<input 
+						id="signup-name" 
+						type="text" 
+						placeholder="John Doe" 
+						required
+						autocomplete="name"
+					/>
+				</div>
+				<div class="input-group">
+					<label for="signup-email">Email Address</label>
+					<input 
+						id="signup-email" 
+						type="email" 
+						placeholder="your.email@example.com" 
+						required
+						autocomplete="email"
+					/>
+				</div>
+				<div class="input-group">
+					<label for="signup-password">Password</label>
+					<input 
+						id="signup-password" 
+						type="password" 
+						placeholder="Minimum 8 characters" 
+						required
+						autocomplete="new-password"
+						minlength="8"
+					/>
+					<small class="input-hint">Use at least 8 characters with letters and numbers</small>
+				</div>
+				<div class="terms-checkbox">
+					<input type="checkbox" id="terms" required />
+					<label for="terms">
+						I agree to the <a href="#" class="link">Terms of Service</a> and <a href="#" class="link">Privacy Policy</a>
+					</label>
+				</div>
+                <button id="signup-btn" class="btn-primary" type="button">
+					<span>Create Account</span>
+				</button>
+				<small id="signup-msg" class="msg" role="alert"></small>
+			</div>
+		</div>
+	</header>
+
+	<!-- Main Dashboard -->
+	<main class="container">
+		<!-- Profile Section -->
+		<section id="profile-section" class="card hidden">
+			<div class="card-header">
+				<h2>Your Profile</h2>
+				<p>Complete your profile to receive personalized alerts</p>
+			</div>
+			<div class="profile-content">
+				<div class="grid">
+					<div class="input-group">
+						<label for="occupation">
+							<span class="label-text">Occupation</span>
+							<span class="label-required">*</span>
+						</label>
+						<input 
+							id="occupation" 
+							type="text" 
+							placeholder="e.g., Forest Officer, Farmer" 
+							required
+						/>
+						<small class="input-hint">Your profession helps us prioritize alerts</small>
+					</div>
+
+					<div class="input-group">
+						<label for="address">
+							<span class="label-text">Address</span>
+							<span class="label-required">*</span>
+						</label>
+						<input 
+							id="address" 
+							type="text" 
+							placeholder="Your full address" 
+							required
+						/>
+					</div>
+
+					<div class="input-group">
+						<label for="area_type">
+							<span class="label-text">Area Type</span>
+							<span class="label-required">*</span>
+						</label>
+						<select id="area_type" required>
+							<option value="">Select your area type</option>
+							<option value="rural">Rural (Villages, Farmland)</option>
+							<option value="semi-urban">Semi-Urban (Town, Suburbs)</option>
+							<option value="urban">Urban (City Center)</option>
+						</select>
+						<small class="input-hint">Helps determine risk level</small>
+					</div>
+
+					<div class="input-group">
+						<label for="phone">
+							<span class="label-text">Contact Number</span>
+						</label>
+						<input 
+							id="phone" 
+							type="tel" 
+							placeholder="+91 98765 43210" 
+							pattern="[+]?[0-9\s-]+"
+						/>
+						<small class="input-hint">For emergency contact</small>
+					</div>
+				</div>
+
+				<!-- Location Settings -->
+				<div class="location-section">
+					<h3>Location Settings</h3>
+					<p class="section-description">Set your coordinates to receive location-based alerts</p>
+					
+					<div class="grid">
+						<div class="input-group">
+							<label for="lat">
+								<span class="label-text">Latitude</span>
+								<span class="label-required">*</span>
+							</label>
+							<input 
+								id="lat" 
+								type="number" 
+								step="any" 
+								placeholder="e.g., 19.076090" 
+								required
+							/>
+						</div>
+
+						<div class="input-group">
+							<label for="lon">
+								<span class="label-text">Longitude</span>
+								<span class="label-required">*</span>
+							</label>
+							<input 
+								id="lon" 
+								type="number" 
+								step="any" 
+								placeholder="e.g., 72.877426" 
+								required
+							/>
+						</div>
+
+						<div class="input-group">
+							<label for="radius_km">
+								<span class="label-text">Alert Radius (km)</span>
+								<span class="label-required">*</span>
+							</label>
+							<input 
+								id="radius_km" 
+								type="number" 
+								step="0.1" 
+								min="0.1"
+								max="50"
+								placeholder="5" 
+								value="5"
+								required
+							/>
+							<small class="input-hint">Receive alerts within this distance</small>
+						</div>
+
+						<div class="location-helper">
+							<button id="get-location-btn" class="btn-secondary" type="button">
+								<span>📍 Use My Current Location</span>
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- Notification Preferences -->
+				<div class="preferences-section">
+					<h3>Alert Preferences</h3>
+					<div class="checkbox-group">
+						<div class="checkbox-item">
+							<input type="checkbox" id="pref-email" checked />
+							<label for="pref-email">
+								<strong>Email Notifications</strong>
+								<small>Receive alerts via email</small>
+							</label>
+						</div>
+						<div class="checkbox-item">
+							<input type="checkbox" id="pref-sms" checked />
+							<label for="pref-sms">
+								<strong>SMS Alerts</strong>
+								<small>Get text messages for critical alerts</small>
+							</label>
+						</div>
+						<div class="checkbox-item">
+							<input type="checkbox" id="pref-push" checked />
+							<label for="pref-push">
+								<strong>Push Notifications</strong>
+								<small>Real-time browser notifications</small>
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="actions">
+				<button id="save-profile" class="btn-primary">
+					<span>💾 Save Profile</span>
+				</button>
+				<button id="logout-btn" class="btn-secondary">
+					<span>Logout</span>
+				</button>
+			</div>
+			<small id="profile-msg" class="msg" role="alert"></small>
+		</section>
+
+		<!-- Active Alerts Section -->
+		<section id="alerts-section" class="card hidden">
+			<div class="card-header">
+				<h2>🚨 Active Alerts</h2>
+				<p>Wildlife detections within your alert radius</p>
+				<div class="alert-stats">
+					<span class="stat-badge">
+						<strong id="alert-count">0</strong> Active Alerts
+					</span>
+					<button id="refresh-alerts" class="btn-icon" title="Refresh alerts">
+						<span>🔄</span>
+					</button>
+				</div>
+			</div>
+			
+			<div class="filter-bar">
+				<select id="filter-species">
+					<option value="">All Species</option>
+					<option value="leopard">Leopard</option>
+					<option value="tiger">Tiger</option>
+					<option value="lion">Lion</option>
+					<option value="cheetah">Cheetah</option>
+				</select>
+				<select id="filter-time">
+					<option value="all">All Time</option>
+					<option value="1h">Last Hour</option>
+					<option value="24h">Last 24 Hours</option>
+					<option value="7d">Last 7 Days</option>
+				</select>
+			</div>
+
+			<div id="alerts-list" class="alerts-list">
+				<div class="empty-state">
+					<div class="empty-icon">🔍</div>
+					<h3>No Active Alerts</h3>
+					<p>You're all clear! We'll notify you when wildlife is detected in your area.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Statistics Dashboard -->
+		<section id="stats-section" class="card hidden">
+			<div class="card-header">
+				<h2>📊 Detection Statistics</h2>
+				<p>Overview of wildlife activity in your area</p>
+			</div>
+			<div class="stats-grid">
+				<div class="stat-card">
+					<div class="stat-icon">🐆</div>
+					<div class="stat-value" id="stat-leopard">0</div>
+					<div class="stat-label">Leopard</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-icon">🐅</div>
+					<div class="stat-value" id="stat-tiger">0</div>
+					<div class="stat-label">Tiger</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-icon">🦁</div>
+					<div class="stat-value" id="stat-lion">0</div>
+					<div class="stat-label">Lion</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-icon">🐆</div>
+					<div class="stat-value" id="stat-cheetah">0</div>
+					<div class="stat-label">Cheetah</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Demo Section (for testing) -->
+		<section id="mock-section" class="card hidden">
+			<div class="card-header">
+				<h3>🧪 Demo Mode</h3>
+				<p>Create mock detections for testing (Admin only)</p>
+			</div>
+			<div class="demo-content">
+				<div class="grid">
+					<div class="input-group">
+						<label for="mock-species">Species</label>
+						<select id="mock-species">
+							<option value="leopard">Leopard</option>
+							<option value="tiger">Tiger</option>
+							<option value="lion">Lion</option>
+							<option value="cheetah">Cheetah</option>
+						</select>
+					</div>
+					<div class="input-group">
+						<label for="mock-lat">Latitude</label>
+						<input id="mock-lat" type="number" step="any" placeholder="19.076090" />
+					</div>
+					<div class="input-group">
+						<label for="mock-lon">Longitude</label>
+						<input id="mock-lon" type="number" step="any" placeholder="72.877426" />
+					</div>
+					<div class="input-group">
+						<label for="mock-confidence">Confidence (%)</label>
+						<input id="mock-confidence" type="number" min="0" max="100" value="95" />
+					</div>
+				</div>
+				<div class="actions">
+					<button id="mock-btn" class="btn-primary">
+						<span>Create Test Detection</span>
+					</button>
+				</div>
+				<small id="mock-msg" class="msg" role="alert"></small>
+			</div>
+		</section>
+
+		<!-- Emergency Contacts -->
+		<section id="emergency-section" class="card hidden">
+			<div class="card-header">
+				<h2>🆘 Emergency Contacts</h2>
+				<p>Quick access to wildlife authorities</p>
+			</div>
+			<div class="contact-grid">
+				<div class="contact-card">
+					<div class="contact-icon">🚓</div>
+					<h4>Wildlife Crime Control Bureau</h4>
+					<p>National Helpline</p>
+					<a href="tel:+911234567890" class="btn-contact">Call Now</a>
+				</div>
+				<div class="contact-card">
+					<div class="contact-icon">🌲</div>
+					<h4>Forest Department</h4>
+					<p>Local Office</p>
+					<a href="tel:+911234567891" class="btn-contact">Call Now</a>
+				</div>
+				<div class="contact-card">
+					<div class="contact-icon">🚨</div>
+					<h4>Emergency Services</h4>
+					<p>Police Control Room</p>
+					<a href="tel:100" class="btn-contact">Call 100</a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="footer-content">
+			<p>&copy; 2024 Wild Animal Monitoring System. Powered by YOLOv8.</p>
+			<div class="footer-links">
+				<a href="#">About</a>
+				<a href="#">Privacy Policy</a>
+				<a href="#">Contact</a>
+				<a href="#">Help</a>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Toast container -->
+	<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+	<script src="/static/app.js"></script>
+</body>
+</html>
