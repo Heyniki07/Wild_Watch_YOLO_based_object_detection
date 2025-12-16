@@ -40,7 +40,5 @@ Content-Type: application/json
 ```
 On each detection, the server will create alerts for users within their configured radius.
 
-## Notes
-- SQLite file is created at `backend/app.db`.
-- For production, set `SECRET_KEY` env var. Consider moving to a proper DB and adding HTTPS.
+
 
