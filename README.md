@@ -1,4 +1,4 @@
-### WILD WATCH
+# WILD WATCH
 
 ## WILD WATCH a YOLOv8-based wild animal monitoring project (Leopard, Tiger, Lion, Cheetah). Includes:
 - Intro section with left-side Login/Signup
