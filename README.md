@@ -29,16 +29,7 @@ The app runs at http://localhost:5000/
 3. Use the demo section to create a mock detection near your coordinates to see alerts.
 4. Click "Forward to WCCB" on an alert to open your email client with prefilled details for the nearest center.
 
-## Connecting YOLOv8
-- Replace the `/api/mock_detection` calls with your YOLO pipeline posting to the same endpoint:
-```http
-POST /api/mock_detection
-Content-Type: application/json
-{
-  "species": "Leopard", "lat": 19.1, "lon": 72.9
-}
-```
-On each detection, the server will create alerts for users within their configured radius.
+
 
 
 
